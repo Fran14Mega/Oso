@@ -1,0 +1,17 @@
+void main () { 
+//orejas
+ellipse(90,100,70,70);
+ellipse(230,100,70,70);
+// cabeza
+ellipse(160,160,150,150);
+//ojos
+ellipse(140,140,30,50);
+ellipse(180,140,30,50);
+ellipse(180,140,10,10);
+ellipse(140,140,10,10);
+//nariz
+ellipse(160,170,30,15);
+//boca
+ellipse(160,200,20,15);
+fill(0,0,0);
+}
