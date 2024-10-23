@@ -1,0 +1,17 @@
+int time = millis()/500;
+
+void main(){
+  animate(ejecutar);
+  background(255,0,0);
+}
+
+void ejecutar(){
+  int t = time - millis()/1000;
+  println ("timeleft "+t );
+  if(t<=-10){
+    time =millis()/1000;
+    t = time - millis()/1000;
+    background(88,255,0);
+  }
+ 
+}
