@@ -1,0 +1,97 @@
+void main(){
+
+  animate(setup);
+
+}
+
+void name(){
+
+textSize(10);
+
+  String nombre = readString("Dime tu nombre");
+
+text("nombre", 50, 50);
+
+}
+
+void setup() {
+
+animate(dibuja);
+
+}
+
+
+void dibuja() {
+
+ background(255,255,255);
+
+  image ("https://static.vecteezy.com/system/resources/thumbnails/003/303/295/small/mountains-background-game-vector.jpg",0,0,320,320);
+
+  textSize(10);
+
+  text("Menú Principal", 50, 50);
+
+  dibujaBoton(50, 100, "Jugar");
+
+  dibujaBoton(50, 150, "Instrucciones");
+
+  dibujaBoton(50, 200, "Créditos");
+
+ animate(fondo);
+
+}
+
+void fondo() {  
+
+  if (mousePressed == true)
+
+   if(mouseButton == LEFTBUTTON)
+
+    if (mouseY > 100 && mouseY < 130) {
+
+      pantalla("No hay juego,que te esperabas?");
+
+    } else if (mouseY > 150 && mouseY < 180) {
+
+      pantalla("W=Adelante;S=Atras;D=Derecha;A=Izquierda");
+
+    } else if (mouseY > 200 && mouseY < 230) {
+
+      pantalla("Hecho por Fran");
+
+    } else if (mouseY > 250 && mouseY < 280) {
+
+      setup(); 
+
+   }
+
+  }
+
+
+void dibujaBoton(int x, int y, String texto) {
+
+  fill(mouseX > x && mouseX < x + 100 && mouseY > y && mouseY < y + 30 ? 180 : 150);
+
+  rect(x, y, 100, 30);
+
+  fill(0);
+
+  text(texto, x + 10, y + 20);
+
+}
+
+
+void pantalla(String nombre) {
+
+  background(100, 200, 100);
+
+  fill(0);
+
+  textSize(10);
+
+  text(nombre, 50, 50);
+
+  dibujaBoton(50, 250, "Volver");
+
+}
+
