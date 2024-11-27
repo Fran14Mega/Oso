@@ -1,0 +1,152 @@
+void main(){
+  animate(setup);
+}
+void name(){
+textSize(10);
+  String nombre = readString("Dime tu nombre");
+	text("nombre", 50, 50);
+}
+void setup() {
+	animate(dibuja);
+}
+
+void dibuja() {
+ background(255,255,255);
+  image ("https://static.vecteezy.com/system/resources/thumbnails/003/303/295/small/mountains-background-game-vector.jpg",0,0,320,320);
+  textSize(10);
+  text("Menú Principal", 50, 50);
+  dibujaBoton(50, 100, "Jugar");
+  dibujaBoton(50, 150, "Instrucciones");
+  dibujaBoton(50, 200, "Créditos");
+ animate(fondo);
+}
+
+void fondo() {  
+  if (mousePressed == true)
+  	if(mouseButton == LEFTBUTTON)
+   	 if (mouseY > 100 && mouseY < 130) {
+      animate(Juego);
+    } else if (mouseY > 150 && mouseY < 180) {
+      pantalla("W=Arriba;S=Abajo;D=Derecha;A=Izquierda");
+    	text("Escape para reiniciar el juego",40,70);
+    } else if (mouseY > 200 && mouseY < 230) {
+      pantalla("Hecho por Fran");
+    } else if (mouseY > 250 && mouseY < 280) {
+      setup(); 
+ }
+}
+
+void Juego(){
+  background(255,255,255);
+  Platano();
+  DonkeyKong();
+  Puntos();
+  Ganar();
+  Perder();
+  Mario();
+}
+
+int DonX = 20;
+int DonY = 20;
+int x = 160-DonX;
+int y = 160-DonY;
+void DonkeyKong() {
+  fill(255,145,0);
+  rect (x,y,DonX,DonY);
+  if (keyPressed && key =="w") {
+    y = y -10;}
+  if (keyPressed && key =="a") {
+    x = x -10;}
+  if (keyPressed && key =="s") {
+    y = y +10;}
+  if (keyPressed && key =="d") {
+    x = x +10;}
+  if (x <= 0){
+    x = 0;}
+  if (x >= 320-DonX){
+    x = 320-DonX;}
+  if (y <= 0){
+    y = 0;}
+  if (y >= 275-DonY){
+    y = 275-DonY;}
+}
+
+double PlaX = random (10,310);
+double PlaY = random (100,250);
+int platanos = 0;
+void Platano(){
+  fill(229,249,15);
+  	ellipse(PlaX, PlaY, 20,20);
+  fill(0,0,0);
+if (x + DonX > PlaX - 10 && x < PlaX + 10 && y + DonY > PlaY - 10 && y < PlaY + 10) {
+    platanos = platanos + 1;
+    PlaX = random (10,275);
+		PlaY = random (100,275);
+ }
+}
+
+void Puntos(){
+  fill(0,0,0);
+  textSize(20);
+  text ("Platanos: " + platanos, 10,310);
+}
+void Perder(){
+	if (x + DonX > MarioX - 10 && x < MarioX + 10 && y + DonY > MarioY - 10 && y < MarioY + 10) {
+    animate(PantallaPerder);
+ }
+}
+
+void Ganar(){
+  if(platanos>14)
+    animate(PantallaGanar);
+}
+
+void PantallaGanar(){
+  background(76,255,0);
+  	fill(0,0,0);
+  		textSize(30);
+  		text ("¡Ganaste!", 80,160);
+  if(keyPressed && key=="Escape")
+    animate(Juego);
+  	x=160;
+    y=160;
+  	platanos=0;
+}
+
+void PantallaPerder(){
+  background(255,255,255);
+  	fill(0,0,0);
+  		textSize(30);
+  		text ("¡Perdiste!", 80,160);
+  if(keyPressed && key=="Escape")
+    animate(Juego);
+  	x=160;
+    y=160;
+  	platanos=0;
+}
+
+double MarioX = random(10,300);
+double MarioY = 15;
+void Mario(){
+  	rect(MarioX,MarioY,30,30);
+  		MarioY = MarioY + 7;
+  if(MarioY>275){
+    rect(MarioX,MarioY,30,30);
+    	MarioY = 0;
+    	MarioX = random(10,300);
+  }
+}
+void dibujaBoton(int x, int y, String texto) {
+  fill(mouseX > x && mouseX < x + 100 && mouseY > y && mouseY < y + 30 ? 180 : 150);
+  rect(x, y, 100, 30);
+  fill(0);
+  text(texto, x + 10, y + 20);
+}
+
+void pantalla(String nombre) {
+  background(100, 200, 100);
+  fill(0);
+  textSize(10);
+  text(nombre, 50, 50);
+  dibujaBoton(50, 250, "Volver");
+}
